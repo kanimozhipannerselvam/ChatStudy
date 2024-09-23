@@ -72,6 +72,43 @@ User authentication mechanisms are essential to ensure secure and authorized acc
 Client-server chat applications are versatile tools that facilitate real-time communication between users over a network. They incorporate various components, including server-side and client-side elements, and must consider factors such as security, scalability, and concurrency. As technology continues to advance, client-server chat applications remain integral for collaborative communication in various domains.
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
+## Program:
+### Client
+```python
+import socket
+s=socket.socket()
+s.bind(('localhost',8000))
+s.listen(5)
+c,addr=s.accept()
+size=int(input("Enter number of frames to send : "))
+l=list(range(size))
+s=int(input("Enter Window Size : "))
+st=0
+i=0
+while True:
+    while(i<len(l)):
+        st+=s
+        c.send(str(l[i:st]).encode())
+        ack=c.recv(1024).decode()
+        if ack:
+            print(ack)
+            i+=s
+```
+### Server
+```python
+import socket
+s=socket.socket()
+s.connect(('localhost',8000))
+while True: 
+    print(s.recv(1024).decode())
+    s.send("acknowledgement recived from the server".encode())
+```
+## Output:
+### Client
+![331645161-b689a79d-ebb0-448b-b2cb-49087215e43a](https://github.com/user-attachments/assets/20038ad2-2790-409a-8583-9432018087be)
+
+### Server
+![331645272-7dc0fadc-cd14-4715-bb65-0d2ed573cc89](https://github.com/user-attachments/assets/8d05d3f0-69d2-4fe1-9323-97925f94da64)
 
 
 ## Result:
